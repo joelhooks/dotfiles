@@ -54,7 +54,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 Bundle "pangloss/vim-javascript"
 
 " some autocompletion
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 
 " more js syntax options
 Bundle 'maksimr/vim-jsbeautify'
@@ -71,8 +71,11 @@ Bundle 'd11wtq/tomorrow-theme-vim'
 " key combos for 'pairs' of things. Mostly previous/next type stuff
 Bundle 'tpope/vim-unimpaired'
 
-so ~/sources/tern/vim/tern.vim
+" so ~/sources/tern/vim/tern.vim
 syntax on
+
+" MBA tiny escape button fix
+imap <C-c> <esc>
 
 try
     color Tomorrow-Night-Bright
