@@ -34,7 +34,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git tmux)
 
-ZSH_TMUX_AUTOSTART=true
+# ZSH_TMUX_AUTOSTART=true
 
 source /opt/boxen/env.sh
 
@@ -58,3 +58,4 @@ export VISUAL="subl -w"
 
 alias vim="mvim -v"
 source /opt/boxen/env.sh
+alias jsctags="NODE_PATH='/usr/local/lib/jsctags' jsctags"

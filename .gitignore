@@ -22,3 +22,10 @@ source
 .CFUserTextEncoding
 .netrwhist
 .vim-fuf-data
+.gem
+.npm
+.cache
+.node-gyp
+.subversion
+Code
+dump

@@ -70,7 +70,7 @@ Bundle 'd11wtq/tomorrow-theme-vim'
 
 " key combos for 'pairs' of things. Mostly previous/next type stuff
 Bundle 'tpope/vim-unimpaired'
-
+Bundle 'wojtekmach/vim-rename'
 " so ~/sources/tern/vim/tern.vim
 syntax on
 
