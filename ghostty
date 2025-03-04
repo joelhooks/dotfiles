@@ -1,0 +1,61 @@
+# Font & Typography
+font-family = Dank Mono
+font-size = 20
+font-thicken = true
+adjust-cell-height = 2
+adjust-underline-position = 40%
+adjust-underline-thickness = -60%
+
+# Theme & Colors
+macos-icon = blueprint
+theme = catppuccin-mocha
+unfocused-split-opacity = 0.95
+unfocused-split-fill = #1e1e2e
+selection-foreground = #cdd6f4
+selection-background = #45475a
+
+# Window Appearance
+window-width = 120
+window-height = 30
+window-padding-x = 20
+window-padding-balance = true
+background-opacity = 0.98
+background-blur-radius = 20
+macos-titlebar-style = transparent
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-opacity = 1.0
+
+# Behavior & Integration
+shell-integration = zsh
+window-save-state = always
+mouse-hide-while-typing = true
+copy-on-select = true
+confirm-close-surface = false
+clipboard-paste-protection = false
+
+# Split Navigation Keybinds
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Tab Navigation Keybinds
+keybind = cmd+h=previous_tab
+keybind = cmd+l=next_tab
+
+# Split Resizing Keybinds
+keybind = cmd+/=new_split:auto
+keybind = super+ctrl+h=resize_split:left,10
+keybind = super+ctrl+j=resize_split:down,10
+keybind = super+ctrl+k=resize_split:up,10
+keybind = super+ctrl+l=resize_split:right,10
+
+# Additional Productivity Keybinds
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+w=close_surface
+keybind = cmd+t=new_tab
+keybind = cmd+shift+t=new_window
