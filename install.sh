@@ -1,84 +1,169 @@
 #!/bin/bash
 
-# Joel's Dotfiles Installer
-# This script sets up all the configurations
+# Install dotfiles - applies configs FROM repo TO system
+# Creates backups of existing configs before overwriting
 
-set -e  # Exit on error
+set -e
 
-echo "🚀 Installing Joel's dotfiles..."
+echo "🚀 Installing dotfiles..."
 echo ""
 
-# Colors for output
+# Colors
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
 
-# Create necessary directories
-echo -e "${BLUE}Creating config directories...${NC}"
-mkdir -p ~/.config/zellij/{themes,layouts}
-mkdir -p ~/.config/atuin/themes
-mkdir -p "$HOME/Library/Application Support/com.mitchellh.ghostty"
+# Backup directory
+BACKUP_DIR="$HOME/.dotfiles-backup/$(date +%Y%m%d-%H%M%S)"
 
-# Install Zsh config
-echo -e "${BLUE}Installing Zsh configuration...${NC}"
-if [ -f ~/.zshrc ]; then
-    cp ~/.zshrc ~/.zshrc.backup
-    echo "  ✓ Backed up existing .zshrc to .zshrc.backup"
+# Function to create backup
+backup_if_exists() {
+    local target="$1"
+    local backup_name="$2"
+    
+    if [ -e "$target" ]; then
+        mkdir -p "$BACKUP_DIR"
+        if [ -d "$target" ]; then
+            cp -r "$target" "$BACKUP_DIR/$backup_name"
+        else
+            cp "$target" "$BACKUP_DIR/$backup_name"
+        fi
+        echo -e "${YELLOW}  📦 Backed up existing $backup_name${NC}"
+        return 0
+    fi
+    return 1
+}
+
+# Function to install a config
+install_config() {
+    local source="$1"
+    local dest="$2"
+    local name="$3"
+    local backup_name="${4:-$(basename "$dest")}"
+    
+    if [ ! -e "$source" ]; then
+        echo -e "${RED}  ✗ Source not found: $source${NC}"
+        return 1
+    fi
+    
+    # Create parent directory if needed
+    mkdir -p "$(dirname "$dest")"
+    
+    # Backup existing config
+    backup_if_exists "$dest" "$backup_name"
+    
+    # Install new config
+    if [ -d "$source" ]; then
+        rsync -av --delete "$source/" "$dest/"
+    else
+        cp "$source" "$dest"
+    fi
+    
+    echo -e "${GREEN}  ✓ Installed $name${NC}"
+}
+
+# Check if running from repo root
+if [ ! -f "install.sh" ]; then
+    echo -e "${RED}Error: Run this script from the dotfiles repo root!${NC}"
+    exit 1
 fi
-cp .zshrc ~/.zshrc
-echo -e "${GREEN}  ✓ Zsh config installed${NC}"
 
-# Install Zellij
-echo -e "${BLUE}Installing Zellij configuration...${NC}"
-cp zellij/config.kdl ~/.config/zellij/
-cp -r zellij/themes/* ~/.config/zellij/themes/
-cp -r zellij/layouts/* ~/.config/zellij/layouts/
-cp zellij/zellij-sessionizer.sh ~/.config/zellij/
+# Zsh
+echo -e "${BLUE}Installing Zsh config...${NC}"
+install_config .zshrc ~/.zshrc "zshrc"
+
+# Install Oh My Zsh if not present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo -e "${BLUE}Installing Oh My Zsh...${NC}"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo -e "${GREEN}  ✓ Installed Oh My Zsh${NC}"
+fi
+
+# Install Zsh plugins
+echo -e "${BLUE}Installing Zsh plugins...${NC}"
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+    echo -e "${GREEN}  ✓ Installed zsh-autosuggestions${NC}"
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+    echo -e "${GREEN}  ✓ Installed zsh-syntax-highlighting${NC}"
+fi
+
+# Pure prompt
+if [ ! -d "$ZSH_CUSTOM/plugins/pure" ]; then
+    mkdir -p "$ZSH_CUSTOM/plugins/pure"
+    git clone https://github.com/sindresorhus/pure.git "$ZSH_CUSTOM/plugins/pure"
+    ln -sf "$ZSH_CUSTOM/plugins/pure/pure.zsh" "$HOME/.zsh/pure/prompt_pure_setup"
+    ln -sf "$ZSH_CUSTOM/plugins/pure/async.zsh" "$HOME/.zsh/pure/async"
+    echo -e "${GREEN}  ✓ Installed pure prompt${NC}"
+fi
+
+# Zellij
+echo -e "${BLUE}Installing Zellij config...${NC}"
+install_config zellij/config.kdl ~/.config/zellij/config.kdl "config"
+install_config zellij/themes ~/.config/zellij/themes "themes" "zellij-themes"
+install_config zellij/layouts ~/.config/zellij/layouts "layouts" "zellij-layouts"
+install_config zellij/zellij-sessionizer.sh ~/.config/zellij/zellij-sessionizer.sh "sessionizer"
 chmod +x ~/.config/zellij/zellij-sessionizer.sh
-echo -e "${GREEN}  ✓ Zellij config installed${NC}"
+install_config zellij/README.md ~/.config/zellij/README.md "README"
 
-# Install Atuin
-echo -e "${BLUE}Installing Atuin configuration...${NC}"
-cp atuin/config.toml ~/.config/atuin/
-cp -r atuin/themes/* ~/.config/atuin/themes/
-echo -e "${GREEN}  ✓ Atuin config installed${NC}"
+# Atuin
+echo -e "${BLUE}Installing Atuin config...${NC}"
+install_config atuin/config.toml ~/.config/atuin/config.toml "config"
+install_config atuin/themes ~/.config/atuin/themes "themes" "atuin-themes"
+install_config atuin/README.md ~/.config/atuin/README.md "README"
 
-# Install Ghostty
-echo -e "${BLUE}Installing Ghostty configuration...${NC}"
-cp ghostty/config "$HOME/Library/Application Support/com.mitchellh.ghostty/"
-cp ghostty/switch-theme.sh "$HOME/Library/Application Support/com.mitchellh.ghostty/"
-chmod +x "$HOME/Library/Application Support/com.mitchellh.ghostty/switch-theme.sh"
-echo -e "${GREEN}  ✓ Ghostty config installed${NC}"
+# Ghostty
+echo -e "${BLUE}Installing Ghostty config...${NC}"
+GHOSTTY_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
+install_config ghostty/config "$GHOSTTY_DIR/config" "config"
+install_config ghostty/switch-theme.sh "$GHOSTTY_DIR/switch-theme.sh" "theme switcher"
+chmod +x "$GHOSTTY_DIR/switch-theme.sh"
+install_config ghostty/README.md "$GHOSTTY_DIR/README.md" "README"
 
-# Install Karabiner
-echo -e "${BLUE}Installing Karabiner configuration...${NC}"
-if [ -f ~/.config/karabiner.edn ]; then
-    cp ~/.config/karabiner.edn ~/.config/karabiner.edn.backup
-    echo "  ✓ Backed up existing karabiner.edn to karabiner.edn.backup"
+# Karabiner
+echo -e "${BLUE}Installing Karabiner config...${NC}"
+install_config karabiner/karabiner.edn ~/.config/karabiner.edn "config"
+install_config karabiner/README.md ~/.config/karabiner/README.md "README"
+
+# Check for required tools
+echo ""
+echo -e "${BLUE}Checking required tools...${NC}"
+
+check_tool() {
+    local tool="$1"
+    local install_cmd="$2"
+    
+    if command -v "$tool" &> /dev/null; then
+        echo -e "${GREEN}  ✓ $tool is installed${NC}"
+    else
+        echo -e "${YELLOW}  ⚠ $tool is not installed${NC}"
+        echo -e "    Install with: $install_cmd"
+    fi
+}
+
+check_tool "zellij" "brew install zellij"
+check_tool "atuin" "brew install atuin"
+check_tool "ghostty" "Download from https://ghostty.org"
+check_tool "goku" "brew install yqrashawn/goku/goku"
+check_tool "fd" "brew install fd"
+check_tool "fzf" "brew install fzf"
+check_tool "tree" "brew install tree"
+check_tool "nvim" "brew install neovim"
+check_tool "rsync" "brew install rsync"
+
+echo ""
+if [ -d "$BACKUP_DIR" ]; then
+    echo -e "${YELLOW}📦 Backups saved to: $BACKUP_DIR${NC}"
 fi
-cp karabiner/karabiner.edn ~/.config/
-echo -e "${GREEN}  ✓ Karabiner config installed${NC}"
-
-# Copy cheatsheets
-echo -e "${BLUE}Installing cheatsheets...${NC}"
-cp ghostty/cheatsheet.md "$HOME/Library/Application Support/com.mitchellh.ghostty/"
-cp zellij/cheatsheet.md ~/.config/zellij/
-cp atuin/cheatsheet.md ~/.config/atuin/
-cp karabiner/cheatsheet.md ~/.config/
-echo -e "${GREEN}  ✓ Cheatsheets installed${NC}"
-
+echo -e "${GREEN}✨ Installation complete!${NC}"
 echo ""
-echo -e "${GREEN}✨ Dotfiles installation complete!${NC}"
+echo "Restart your terminal or run: source ~/.zshrc"
 echo ""
-echo "🎯 Next steps:"
-echo "  1. Restart your terminal or run: source ~/.zshrc"
-echo "  2. Start Zellij: zj"
-echo "  3. Try Atuin search: Ctrl+R"
-echo "  4. Reload Ghostty config: Cmd+R"
-echo "  5. If using Goku, run: goku to compile Karabiner config"
-echo ""
-echo "📚 Cheatsheets available:"
-echo "  - Zellij: ~/.config/zellij/cheatsheet.md"
-echo "  - Atuin: ~/.config/atuin/cheatsheet.md"
-echo "  - Ghostty: ~/Library/Application Support/com.mitchellh.ghostty/cheatsheet.md"
-echo "  - Karabiner: ~/.config/karabiner/cheatsheet.md" 
+echo "To sync changes back to the repo, run: ./sync-from-system.sh" 
