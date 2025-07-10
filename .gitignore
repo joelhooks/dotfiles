@@ -1,31 +1,57 @@
-Library
-.bash_history
-.ssh
-.zcompdump
-.zsh-update
-.zsh_history
-.vimrc
-*.
-Desktop
-Downloads
-Documents
-Movies
-Music
-Pictures
-Public
-source
-.gemrc
-.gitconfig
-.hgignore_global
-.viminfo
-.Trash
-.CFUserTextEncoding
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Vim
+*.swp
+*.swo
+*~
 .netrwhist
-.vim-fuf-data
-.gem
-.npm
-.cache
-.node-gyp
-.subversion
-Code
-dump
+
+# Zsh
+*.zwc
+.zcompdump*
+.zsh_history
+.zsh_sessions
+
+# Local overrides
+*.local
+.env
+
+# Backup files
+*.backup
+*.bak
+*.orig
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Cache directories
+.cache/
+
+# IDE specific
+.idea/
+.vscode/
+*.sublime-*
+
+# OS generated files
+Thumbs.db
