@@ -24,10 +24,13 @@ Magical shell history that syncs across machines, with smart search and statisti
 | `Esc` | Exit search |
 
 ### Navigation
-- `↑/↓` or `j/k` - Navigate results
+- `↑/↓` or `j/k` - Navigate results (won't exit at boundaries)
 - `PageUp/PageDown` - Page through results
 - `Ctrl+u/d` - Half page up/down
 - `Home/End` - Jump to start/end
+- `←` - Move cursor (won't exit search)
+- `→` - Accept line (same as Tab)
+- `Ctrl+1-9` - Quick shortcuts (macOS friendly)
 
 ### Filters (during search)
 - `Ctrl+h` - Filter: host
@@ -87,25 +90,42 @@ atuin import auto              # Auto-detect shell
 ### Key Settings (in config.toml)
 ```toml
 # Search
-search_mode = "fuzzy"          # fuzzy, prefix, fulltext
-filter_mode = "global"         # global, host, session, directory
-inline_height = 15             # Search UI height
+search_mode = "fuzzy"                      # fuzzy, prefix, fulltext
+filter_mode = "global"                     # Default filter mode
+filter_mode_shell_up_key_binding = "directory"  # Up arrow uses directory context
+workspaces = true                          # Git workspace awareness enabled
+inline_height = 0                          # Maximum visibility (full screen)
 
 # UI
-style = "compact"              # auto, full, compact
-show_preview = true            # Show command preview
-invert = false                 # Search bar position
-show_help = false              # Show help text
+style = "auto"                             # Adaptive layout
+show_preview = true                        # Show command preview
+max_preview_height = 20                    # See lots more context
+invert = false                             # Search bar at bottom
+show_help = false                          # Cleaner UI
+show_tabs = true                           # Show search/inspect tabs
+
+# Navigation
+ctrl_n_shortcuts = true                    # Use Ctrl+1-9 (better for macOS)
+scroll_exits = false                       # Keep browsing at boundaries
+exit_past_line_start = false               # Don't exit on left arrow
 
 # History
-history_filter = [...]         # Regex filters
-secrets_filter = true          # Filter secrets
-enter_accept = true            # Enter runs command
+history_filter = [                         # Comprehensive filters
+  # Security
+  "^secret", "password=", "token=", "api_key=",
+  # Noise
+  "^ls$", "^cd$", "^pwd$", "^exit$",
+  # Typos
+  "^[^a-zA-Z]", "^\\s"
+]
+secrets_filter = true                      # Auto-filter secrets
+enter_accept = true                        # Enter runs command
 
 # Performance  
-sync_frequency = "30m"         # Sync interval
-auto_sync = true               # Enable auto sync
-update_check = false           # Disable update checks
+sync_frequency = "30m"                     # Sync interval
+auto_sync = true                           # Enable auto sync
+update_check = false                       # Manual update checks
+local_timeout = 2                          # Fast local DB
 ```
 
 ### Custom Aliases (from .zshrc)
@@ -118,13 +138,16 @@ ht              # Theme switcher
 
 ## Filter Modes
 
-1. **Global** - All commands from all time
-2. **Host** - Only from current machine
-3. **Session** - Current shell session only
-4. **Directory** - Current directory only
-5. **Workspace** - Current git repository
+Default filter priority order:
+1. **Workspace** - Current git repository (when in a repo)
+2. **Directory** - Current directory only (default for ↑ arrow)
+3. **Global** - All commands from all time
+4. **Host** - Only from current machine
+5. **Session** - Current shell session only
 
-**Switch modes**: Use Ctrl+g/h/s/d/w during search
+**Switch modes**: Use Ctrl+w/d/g/h/s during search
+
+**Note**: Up arrow uses directory filter by default for context-aware history!
 
 ## Search Syntax
 
@@ -178,6 +201,12 @@ atuin stats --cmd docker
 # Time-based analysis  
 atuin stats --before 1w --after 2w
 ```
+
+**Enhanced subcommand tracking** for:
+- git, docker, npm, pnpm, yarn
+- kubectl, terraform, aws, gcloud, az
+- brew, cargo, go, gh, vercel
+- systemctl, tmux, apt, dnf, nix
 
 ## Troubleshooting
 
