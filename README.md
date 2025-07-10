@@ -67,15 +67,15 @@ cd ~/Code/joelhooks/dotfiles
 
 Each tool can be installed individually by copying its config files to the appropriate location. See the [install script](install.sh) for details.
 
-## 📚 Cheatsheets
+## 📚 Documentation
 
-Each tool includes a comprehensive cheatsheet:
+Each tool includes comprehensive documentation:
 
-- [Zsh Cheatsheet](.zshrc) - Aliases and functions
-- [Zellij Cheatsheet](zellij/cheatsheet.md) - Keybindings and layouts
-- [Ghostty Cheatsheet](ghostty/cheatsheet.md) - Terminal shortcuts
-- [Atuin Cheatsheet](atuin/cheatsheet.md) - Search operators
-- [Karabiner Cheatsheet](karabiner/cheatsheet.md) - Keyboard layers
+- [Zsh Configuration](.zshrc) - Aliases and functions
+- [Zellij Documentation](zellij/) - Keybindings and layouts
+- [Ghostty Documentation](ghostty/) - Terminal shortcuts
+- [Atuin Documentation](atuin/) - Search operators
+- [Karabiner Documentation](karabiner/) - Keyboard layers
 
 ## ⚡ Key Features
 
