@@ -7,21 +7,23 @@ adjust-underline-position = 40%
 adjust-underline-thickness = -60%
 
 # Theme & Colors
-macos-icon = blueprint
-theme = catppuccin-mocha
-unfocused-split-opacity = 0.95
-unfocused-split-fill = #1e1e2e
-selection-foreground = #cdd6f4
-selection-background = #45475a
+macos-icon = official
+theme = catppuccin-macchiato
+unfocused-split-opacity = 0.93
+unfocused-split-fill = #24273a
+selection-foreground = #cad3f5
+selection-background = #5b6078
 
 # Window Appearance
-window-width = 120
-window-height = 30
+window-width = 140
+window-height = 35
 window-padding-x = 20
+window-padding-y = 15
 window-padding-balance = true
-background-opacity = 0.98
-background-blur-radius = 20
+background-opacity = 0.97
+background-blur-radius = 25
 macos-titlebar-style = transparent
+macos-titlebar-proxy-icon = hidden
 
 # Cursor
 cursor-style = block
@@ -32,9 +34,17 @@ cursor-opacity = 1.0
 shell-integration = zsh
 window-save-state = always
 mouse-hide-while-typing = true
-copy-on-select = true
+copy-on-select = clipboard
 confirm-close-surface = false
 clipboard-paste-protection = false
+clipboard-read = allow
+clipboard-write = allow
+shell-integration-features = cursor,sudo,title
+
+# Performance & Scrollback
+scrollback-limit = 1000000
+link-url = true
+gtk-single-instance = true
 
 # Split Navigation Keybinds
 keybind = ctrl+h=goto_split:left
@@ -59,3 +69,22 @@ keybind = cmd+shift+d=new_split:down
 keybind = cmd+w=close_surface
 keybind = cmd+t=new_tab
 keybind = cmd+shift+t=new_window
+keybind = shift+enter=text:\n
+
+# Quick Tab Switching (like Zellij)
+keybind = cmd+1=goto_tab:1
+keybind = cmd+2=goto_tab:2
+keybind = cmd+3=goto_tab:3
+keybind = cmd+4=goto_tab:4
+keybind = cmd+5=goto_tab:5
+keybind = cmd+6=goto_tab:6
+keybind = cmd+7=goto_tab:7
+keybind = cmd+8=goto_tab:8
+keybind = cmd+9=goto_tab:9
+
+# Zoom & Focus
+keybind = cmd+enter=toggle_split_zoom
+keybind = cmd+shift+f=toggle_fullscreen
+
+# Reload Config
+keybind = cmd+r=reload_config

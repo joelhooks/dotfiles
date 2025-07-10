@@ -137,6 +137,18 @@ keybinds clear-defaults=true {
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
         bind "Ctrl q" { Quit; }
+        // Additional convenient bindings
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        bind "Alt w" { CloseTab; }
+        bind "Alt r" { SwitchToMode "renametab"; TabNameInput 0; }
     }
     shared_except "locked" "move" {
         bind "Alt m" { SwitchToMode "move"; }
@@ -264,12 +276,12 @@ load_plugins {
 //   - true
 //   - false (Default)
 // 
-simplified_ui true
+simplified_ui false // Disable for better aesthetics with proper fonts
  
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "catppuccin-mocha"
+theme "catppuccin-macchiato"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -288,17 +300,17 @@ default_mode "normal"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "custom"
+default_layout "default"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 // 
-// layout_dir "/tmp"
+layout_dir "/Users/joel/.config/zellij/layouts"
  
 // The folder in which Zellij will look for themes
 // (Requires restart)
 // 
-// theme_dir "/tmp"
+theme_dir "/Users/joel/.config/zellij/themes"
  
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
@@ -314,7 +326,7 @@ default_mode "normal"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames false
+pane_frames true // Enable for better visual separation
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
@@ -340,7 +352,7 @@ pane_frames false
 // Valid values: positive integers
 // Default value: 10000
 // 
-scroll_buffer_size 50000
+scroll_buffer_size 1000000
  
 // Provide a command to execute when copying text. The text will be piped to
 // the stdin of the program to perform the copy. This can be used with
@@ -410,7 +422,7 @@ serialize_pane_viewport true
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
 // 
-scrollback_lines_to_serialize 50000
+scrollback_lines_to_serialize 100000
  
 // Enable or disable the rendering of styled and colored underlines (undercurl).
 // May need to be disabled for certain unsupported terminals
@@ -435,6 +447,14 @@ serialization_interval 600
 // Default: true (if the host terminal supports it)
 // 
 // support_kitty_keyboard_protocol false
+
+// UI Configuration
+ui {
+    pane_frames {
+        rounded_corners true
+        hide_session_name false
+    }
+}
 
 // Add this to handle Esc consistently across all modes except locked
 shared_except "normal" "locked" {

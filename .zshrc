@@ -135,6 +135,16 @@ alias .....='cd ../../../..'
 alias ~='cd ~'
 alias -- -='cd -'
 
+# Zellij aliases
+alias zj='zellij'
+alias zja='zellij attach'
+alias zjl='zellij list-sessions'
+alias zjk='zellij kill-session'
+alias zjka='zellij kill-all-sessions'
+alias zjd='zellij --layout dev'
+alias zs='~/.config/zellij/zellij-sessionizer.sh'
+bindkey -s '^f' 'zs\n'  # Ctrl+f to launch sessionizer
+
 # Useful functions
 mkd() { mkdir -p "$@" && cd "$_"; }
 tre() { tree -aC -I '.git|node_modules|.next|dist|build' --dirsfirst "$@" | less -FRNX; }
@@ -158,6 +168,25 @@ extract() {
     echo "'$1' is not a valid file"
   fi
 }
+ht() {
+  echo "🎨 Catppuccin Macchiato themes:"
+  echo "1. Mauve (purple)"
+  echo "2. Blue"
+  echo "3. Green"
+  echo "4. Pink"
+  echo -n "Select (1-4): "
+  read choice
+  case $choice in
+    1) theme="catppuccin-macchiato-mauve" ;;
+    2) theme="catppuccin-macchiato-blue" ;;
+    3) theme="catppuccin-macchiato-green" ;;
+    4) theme="catppuccin-macchiato-pink" ;;
+    *) echo "❌ Invalid choice"; return 1 ;;
+  esac
+  sed -i '' "s/name = \".*\"/name = \"$theme\"/" ~/.config/atuin/config.toml
+  echo "✅ Theme switched to $theme!"
+  echo "🚀 Press Ctrl+R to see the new theme"
+}
 
 # Pure prompt
 autoload -U promptinit; promptinit
@@ -170,9 +199,21 @@ if [ -d "$FNM_PATH" ]; then
   eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
-# atuin
+# atuin - enhanced shell history
 . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
+
+# Atuin key bindings
+bindkey '^r' atuin-search      # Ctrl+R for fuzzy history search
+bindkey '^[[A' atuin-up         # Up arrow for context-aware history
+bindkey '^[OA' atuin-up         # Up arrow (alternate)
+
+# Atuin aliases
+alias h='atuin search'          # Quick history search
+alias hs='atuin stats'          # History statistics
+alias hd='atuin history delete' # Delete history entry
+# alias ht defined below as function
+alias gt='~/Library/Application\ Support/com.mitchellh.ghostty/switch-theme.sh' # Switch Ghostty theme
 
 # Editors
 export EDITOR="nvim"
