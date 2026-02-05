@@ -883,6 +883,7 @@ require('lazy').setup({
 
   { -- Oil.nvim - file explorer as a buffer (edit filesystem like text)
     'stevearc/oil.nvim',
+    lazy = false, -- load on startup so keymaps work
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('oil').setup {
