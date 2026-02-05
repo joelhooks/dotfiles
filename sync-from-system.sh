@@ -61,9 +61,9 @@ echo -e "${BLUE}Syncing Karabiner...${NC}"
 sync_config ~/.config/karabiner.edn karabiner/karabiner.edn "config"
 sync_config ~/.config/karabiner/README.md karabiner/README.md "README" 2>/dev/null || true
 
-# Neovim
-echo -e "${BLUE}Syncing Neovim...${NC}"
-sync_config ~/.config/nvim/init.lua nvim/init.lua "init.lua"
+# Neovim (symlinked - no sync needed)
+echo -e "${BLUE}Neovim...${NC}"
+echo -e "${GREEN}  ✓ Symlinked (no sync needed)${NC}"
 
 echo ""
 echo -e "${GREEN}✨ Sync complete!${NC}"

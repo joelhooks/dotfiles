@@ -132,9 +132,12 @@ echo -e "${BLUE}Installing Karabiner config...${NC}"
 install_config karabiner/karabiner.edn ~/.config/karabiner.edn "config"
 install_config karabiner/README.md ~/.config/karabiner/README.md "README"
 
-# Neovim
+# Neovim (symlink entire directory)
 echo -e "${BLUE}Installing Neovim config...${NC}"
-install_config nvim/init.lua ~/.config/nvim/init.lua "init.lua"
+backup_if_exists ~/.config/nvim "nvim"
+rm -rf ~/.config/nvim
+ln -s "$(pwd)/nvim" ~/.config/nvim
+echo -e "${GREEN}  ✓ Symlinked nvim config${NC}"
 
 # Check for required tools
 echo ""
