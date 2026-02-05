@@ -937,6 +937,15 @@ require('lazy').setup({
 
       -- Start screen with essential keybinds
       local starter = require 'mini.starter'
+
+      -- Override '-' to open Oil even on starter screen
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'MiniStarterOpened',
+        callback = function(ev)
+          vim.keymap.set('n', '-', '<CMD>Oil<CR>', { buffer = ev.buf, desc = 'Open Oil' })
+        end,
+      })
+
       starter.setup {
         header = table.concat({
           '┌─────────────────────────────────────┐',
