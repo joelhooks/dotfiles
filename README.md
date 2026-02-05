@@ -50,6 +50,7 @@ This setup features:
 - kickstart.nvim base (minimal, understandable)
 - Catppuccin theme
 - Oil.nvim file explorer (edit filesystem like a buffer)
+- Harpoon for instant file jumping (`Ctrl+1/2/3/4`)
 - Telescope fuzzy finder
 - LSP support with Mason
 - Built-in cheatsheet (`<Space>?`)
@@ -102,12 +103,14 @@ Each tool includes comprehensive documentation:
 
 | Shortcut | Action |
 |----------|--------|
+| `<Space>a` | Add file to harpoon |
+| `<Space>h` | Open harpoon menu |
+| `Ctrl+1/2/3/4` | Jump to harpooned file |
 | `-` | Open file explorer (Oil) |
 | `<Space>sf` | Find files |
 | `<Space>sg` | Grep search |
 | `<Space>sk` | Search keymaps |
 | `<Space>?` | Show cheatsheet |
-| `<Space><Space>` | Open buffers |
 
 ### Quick Commands
 
