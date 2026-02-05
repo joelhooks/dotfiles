@@ -132,6 +132,10 @@ echo -e "${BLUE}Installing Karabiner config...${NC}"
 install_config karabiner/karabiner.edn ~/.config/karabiner.edn "config"
 install_config karabiner/README.md ~/.config/karabiner/README.md "README"
 
+# Neovim
+echo -e "${BLUE}Installing Neovim config...${NC}"
+install_config nvim/init.lua ~/.config/nvim/init.lua "init.lua"
+
 # Check for required tools
 echo ""
 echo -e "${BLUE}Checking required tools...${NC}"

@@ -61,6 +61,10 @@ echo -e "${BLUE}Syncing Karabiner...${NC}"
 sync_config ~/.config/karabiner.edn karabiner/karabiner.edn "config"
 sync_config ~/.config/karabiner/README.md karabiner/README.md "README" 2>/dev/null || true
 
+# Neovim
+echo -e "${BLUE}Syncing Neovim...${NC}"
+sync_config ~/.config/nvim/init.lua nvim/init.lua "init.lua"
+
 echo ""
 echo -e "${GREEN}✨ Sync complete!${NC}"
 echo ""

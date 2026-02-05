@@ -1,6 +1,6 @@
 # Joel's Dotfiles 🚀
 
-> A highly optimized macOS development environment featuring Zsh, Zellij, Ghostty, Atuin, and Karabiner configurations.
+> A highly optimized macOS development environment featuring Zsh, Zellij, Ghostty, Atuin, Neovim, and Karabiner configurations.
 
 ![Catppuccin Macchiato](https://img.shields.io/badge/theme-catppuccin%20macchiato-purple?style=for-the-badge)
 ![Zsh](https://img.shields.io/badge/shell-zsh-green?style=for-the-badge)
@@ -46,6 +46,15 @@ This setup features:
 - Catppuccin themes (4 accent colors)
 - Smart command filtering
 
+### [Neovim](nvim/) - Text Editor
+- kickstart.nvim base (minimal, understandable)
+- Catppuccin theme
+- Oil.nvim file explorer (edit filesystem like a buffer)
+- Telescope fuzzy finder
+- LSP support with Mason
+- Built-in cheatsheet (`<Space>?`)
+- which-key for discovering keybinds
+
 ### [Karabiner](karabiner/) - Keyboard Customization
 - Caps Lock → Escape/Control
 - Home row modifiers
@@ -75,6 +84,7 @@ Each tool includes comprehensive documentation:
 - [Zellij Documentation](zellij/) - Keybindings and layouts
 - [Ghostty Documentation](ghostty/) - Terminal shortcuts
 - [Atuin Documentation](atuin/) - Search operators
+- [Neovim Configuration](nvim/) - Editor keybindings
 - [Karabiner Documentation](karabiner/) - Keyboard layers
 
 ## ⚡ Key Features
@@ -87,6 +97,17 @@ Each tool includes comprehensive documentation:
 | `Ctrl+r` | Atuin fuzzy history search |
 | `Alt+1-9` | Quick tab switching |
 | `Caps Lock` | Escape (tap) / Control (hold) |
+
+### Neovim Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `-` | Open file explorer (Oil) |
+| `<Space>sf` | Find files |
+| `<Space>sg` | Grep search |
+| `<Space>sk` | Search keymaps |
+| `<Space>?` | Show cheatsheet |
+| `<Space><Space>` | Open buffers |
 
 ### Quick Commands
 
@@ -133,6 +154,7 @@ Theme switchers are included for easy customization:
 - [Zellij](https://zellij.dev)
 - [Ghostty](https://ghostty.org)
 - [Atuin](https://atuin.sh)
+- [Neovim](https://neovim.io) (`brew install neovim`)
 - [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 - [Goku](https://github.com/yqrashawn/GokuRakuJoudo) (for Karabiner EDN)
 
@@ -158,6 +180,8 @@ Theme switchers are included for easy customization:
 │   └── themes/              # Catppuccin themes
 ├── karabiner/                # Keyboard config
 │   └── karabiner.edn        # Goku config
+├── nvim/                     # Neovim config
+│   └── init.lua             # kickstart.nvim based
 └── install.sh               # Installation script
 ```
 
