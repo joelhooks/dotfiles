@@ -322,6 +322,11 @@ require('lazy').setup({
           '╭──────────────────────────────────────────────────────────╮',
           '│                    NEOVIM CHEATSHEET                     │',
           '├──────────────────────────────────────────────────────────┤',
+          '│  HARPOON (mark & jump to files)                          │',
+          '│    <Space>a    Add current file to harpoon               │',
+          '│    <Space>h    Open harpoon menu                         │',
+          '│    <C-1/2/3/4> Jump to harpooned file 1/2/3/4            │',
+          '├──────────────────────────────────────────────────────────┤',
           '│  FILES & NAVIGATION                                      │',
           '│    -           Open parent dir (Oil file explorer)       │',
           '│    <Space>e    Explore files from cwd                    │',
@@ -914,6 +919,32 @@ require('lazy').setup({
       vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory (Oil)' })
       -- Open file explorer at cwd
       vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = '[E]xplore files (Oil)' })
+    end,
+  },
+
+  { -- Harpoon - mark and jump to files instantly
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local harpoon = require 'harpoon'
+      harpoon:setup {}
+
+      -- Add file to harpoon
+      vim.keymap.set('n', '<leader>a', function() harpoon:list():add() end, { desc = 'Harpoon [A]dd file' })
+
+      -- Toggle harpoon menu
+      vim.keymap.set('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = '[H]arpoon menu' })
+
+      -- Jump to harpooned files with Ctrl+1/2/3/4
+      vim.keymap.set('n', '<C-1>', function() harpoon:list():select(1) end, { desc = 'Harpoon file 1' })
+      vim.keymap.set('n', '<C-2>', function() harpoon:list():select(2) end, { desc = 'Harpoon file 2' })
+      vim.keymap.set('n', '<C-3>', function() harpoon:list():select(3) end, { desc = 'Harpoon file 3' })
+      vim.keymap.set('n', '<C-4>', function() harpoon:list():select(4) end, { desc = 'Harpoon file 4' })
+
+      -- Navigate harpoon list
+      vim.keymap.set('n', '<C-S-P>', function() harpoon:list():prev() end, { desc = 'Harpoon prev' })
+      vim.keymap.set('n', '<C-S-N>', function() harpoon:list():next() end, { desc = 'Harpoon next' })
     end,
   },
 
