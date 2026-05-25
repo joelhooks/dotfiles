@@ -53,7 +53,7 @@ The sync script only moves the local `.shitrat` cache tree. It does not install 
 
 ## Machine-specific private config repo
 
-If a machine needs durable private wiring beyond this public setup shape, create a private repo such as `joelhooks/shitrat-blaine` and symlink from it. Keep public `dotfiles` as the reusable installer/docs layer; keep private hostnames, local profile JSON, machine inventory, and ShitRat cache shape in the private repo. Do not commit raw inbox cache or tokens there either.
+For Blaine, durable private wiring lives in private repo `joelhooks/shitrat-blaine`. Keep public `dotfiles` as the reusable installer/docs layer; keep private hostnames, local profile JSON, machine inventory, and ShitRat cache shape in the private repo. Do not commit raw inbox cache or tokens there either.
 
 ## Safety
 
