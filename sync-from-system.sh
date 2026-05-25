@@ -62,6 +62,12 @@ private_prefixes = (
     'claude() { command claude --dangerously-skip-permissions',
 )
 
+safe_private_export_lines = {
+    'export HUGE_ICONS_NPM_TOKEN="$token"',
+    'export PI_LLM_API_KEY="$token"',
+    'export AGENT_AXIOM_TOKEN="$token"',
+}
+
 for line in lines:
     stripped = line.strip()
 
@@ -84,7 +90,7 @@ for line in lines:
             skip_badass_stats_block = False
         continue
 
-    if stripped.startswith(private_prefixes):
+    if stripped.startswith(private_prefixes) and stripped not in safe_private_export_lines:
         continue
 
     if stripped in (

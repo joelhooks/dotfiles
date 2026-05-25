@@ -291,6 +291,63 @@ export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:$HOME/go/bin"
 
+# Secrets are leased on demand instead of exported into every shell.
+_secret_lease() {
+  command -v secrets >/dev/null 2>&1 || { echo "secrets CLI not found" >&2; return 127; }
+  secrets lease "$1" --ttl "${2:-1h}" --client-id "zsh:${USER}@$(hostname -s)"
+}
+
+_secret_lease_required() {
+  local value
+  value="$(_secret_lease "$@")" || return
+  [[ -n "$value" ]] || { echo "empty secret lease for $1" >&2; return 1; }
+  printf '%s' "$value"
+}
+
+with-huge-icons-npm() {
+  (( $# )) || { echo "usage: with-huge-icons-npm <command> [args...]" >&2; return 2; }
+  local token
+  token="$(_secret_lease_required HUGE_ICONS_NPM_TOKEN "${SECRETS_TTL:-1h}")" || return
+  HUGE_ICONS_NPM_TOKEN="$token" "$@"
+}
+
+load-huge-icons-npm-token() {
+  local token
+  token="$(_secret_lease_required HUGE_ICONS_NPM_TOKEN "${1:-1h}")" || return
+  export HUGE_ICONS_NPM_TOKEN="$token"
+}
+
+with-pi-llm() {
+  (( $# )) || { echo "usage: with-pi-llm <command> [args...]" >&2; return 2; }
+  local token
+  token="$(_secret_lease_required PI_LLM_API_KEY "${SECRETS_TTL:-1h}")" || return
+  PI_LLM_API_KEY="$token" \
+    PI_LLM_MODEL="${PI_LLM_MODEL:-openai-codex/gpt-5.5}" \
+    "$@"
+}
+
+load-pi-llm-secret() {
+  local token
+  token="$(_secret_lease_required PI_LLM_API_KEY "${1:-1h}")" || return
+  export PI_LLM_API_KEY="$token"
+  export PI_LLM_MODEL="${PI_LLM_MODEL:-openai-codex/gpt-5.5}"
+}
+
+with-agent-axiom() {
+  (( $# )) || { echo "usage: with-agent-axiom <command> [args...]" >&2; return 2; }
+  local token
+  token="$(_secret_lease_required AGENT_AXIOM_TOKEN "${SECRETS_TTL:-1h}")" || return
+  AGENT_AXIOM_TOKEN="$token" \
+    AGENT_AXIOM_DATASET="${AGENT_AXIOM_DATASET:-egghead-rails}" \
+    "$@"
+}
+
+load-agent-axiom-secret() {
+  local token
+  token="$(_secret_lease_required AGENT_AXIOM_TOKEN "${1:-1h}")" || return
+  export AGENT_AXIOM_TOKEN="$token"
+}
+
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
@@ -300,7 +357,7 @@ export PATH="$PATH:$HOME/go/bin"
 # Added by Ultimate Bug Scanner Installer
 alias bash='/opt/homebrew/bin/bash'
 
-export PI_LLM_MODEL="anthropic/claude-sonnet-4-5"
+export PI_LLM_MODEL="openai-codex/gpt-5.5"
 
 # Swarm plugin pretty logging
 export SWARM_LOG_PRETTY=1

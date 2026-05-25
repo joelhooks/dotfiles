@@ -1,6 +1,6 @@
 # Joel's Dotfiles 🚀
 
-> A highly optimized macOS development environment featuring Zsh, Zellij, Ghostty, Atuin, Neovim, and Karabiner configurations.
+> Joel's executable macOS machine profile: shell, terminal, editor, keyboard, and agent setup without the private-token footgun.
 
 ![Catppuccin Mocha](https://img.shields.io/badge/theme-catppuccin%20mocha-purple?style=for-the-badge)
 ![Zsh](https://img.shields.io/badge/shell-zsh-green?style=for-the-badge)
@@ -15,6 +15,7 @@ This setup features:
 - **Fuzzy history search** with workspace/directory filtering
 - **Advanced keyboard customization** with Karabiner
 - **Session persistence** with Zellij
+- **Agent-facing maintenance docs** for safely extending the machine setup
 
 ## 📦 What's Included
 
@@ -63,6 +64,11 @@ This setup features:
 - App-specific shortcuts
 - Emoji layer
 
+### Agentic Machine Setup
+- [AGENTS.md](AGENTS.md) tells agents how to maintain this repo without leaking local runtime sludge.
+- [Machine Profile](docs/machine-profile.md) maps what belongs here vs what stays private.
+- [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) is a portable skill for syncing, reviewing, and extending the setup.
+
 ## 🛠 Installation
 
 ### Quick Install
@@ -87,6 +93,9 @@ Each tool includes comprehensive documentation:
 - [Atuin Documentation](atuin/) - Search operators
 - [Neovim Configuration](nvim/) - Editor keybindings
 - [Karabiner Documentation](karabiner/) - Keyboard layers
+- [Machine Profile](docs/machine-profile.md) - Agentic setup map
+- [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) - Agent workflow for safe changes
+- [Agent tool bootstrap check](scripts/bootstrap-agent-tools.sh) - verifies Pi/Codex/Claude/OpenCode/ShitRat/secrets/JoelClaw are present
 
 ## ⚡ Key Features
 
@@ -117,6 +126,9 @@ Each tool includes comprehensive documentation:
 | Command | Description |
 |---------|-------------|
 | `zj` | Start Zellij |
+| `zjh` | Start Zellij with home layout |
+| `zjo` | Start Zellij with OpenCode layout |
+| `zm` | Start phone-friendly Zellij session |
 | `zs` | Project sessionizer |
 | `h` | Atuin search |
 | `hs` | History stats |
@@ -135,6 +147,8 @@ Each tool includes comprehensive documentation:
 | `glog` | git log (graph) |
 | `dev` | cd ~/Code |
 | `mkd` | Create & enter directory |
+| `with-pi-llm <cmd>` | Run a command with a short-lived `PI_LLM_API_KEY` lease |
+| `with-agent-axiom <cmd>` | Run a command with a short-lived Axiom token lease |
 
 ## 🎨 Theme Consistency
 
@@ -185,6 +199,10 @@ Theme switchers are included for easy customization:
 │   └── karabiner.edn        # Goku config
 ├── nvim/                     # Neovim config
 │   └── init.lua             # kickstart.nvim based
+├── docs/                     # Machine profile and setup notes
+├── skills/                   # Agent skills for maintaining this setup
+├── scripts/                  # Doctor and agent-tool check helpers
+├── AGENTS.md                 # Agent instructions for this repo
 └── install.sh               # Installation script
 ```
 
