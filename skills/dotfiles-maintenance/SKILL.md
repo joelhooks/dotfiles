@@ -18,7 +18,7 @@ This repo is Joel's executable machine taste. Keep it useful for a fresh machine
 ./scripts/bootstrap-network-trust.sh
 ```
 
-The doctor script runs syntax checks, Zellij config validation, JSON template validation, an obvious secret scan, and local runtime-file checks. The bootstrap checks verify focused parts of the machine without copying auth files.
+The doctor script runs syntax checks, Zellij config validation, JSON template validation, an obvious secret scan, and Pi runtime-file checks. The bootstrap checks verify focused parts of the machine without copying auth files.
 
 ## Secret rule
 
@@ -53,7 +53,7 @@ For Pi, Claude, Codex, ShitRat, JoelClaw, and similar tools:
 ## Publish checklist
 
 - [ ] `git status --short --untracked-files=all` contains only intended files.
-- [ ] `.pi/`, `.brain/`, `BRAIN.md`, local review artifacts, and session outputs are ignored/untracked.
+- [ ] `.pi/`, local review artifacts, and session outputs are ignored/untracked. Project `.brain/` and `BRAIN.md` are okay only when intentionally curated and public-safe.
 - [ ] Shell/config syntax checks pass.
 - [ ] Every docs-mentioned layout/keybind/script either exists in repo or is clearly optional.
 - [ ] Public commit is made as `shitratgit[bot]` when ShitRat has access.

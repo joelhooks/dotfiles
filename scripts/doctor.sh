@@ -62,11 +62,11 @@ if [[ -n "$leaks" ]]; then
 fi
 echo "✓ obvious secret scan"
 
-if git status --short --untracked-files=all | grep -E '^(.. )?(\.pi/|\.brain/|BRAIN\.md)' >/dev/null; then
-  echo "✗ local Brain/Pi runtime files are visible to git" >&2
+if git status --short --untracked-files=all | grep -E '^(.. )?\.pi/' >/dev/null; then
+  echo "✗ Pi runtime files are visible to git" >&2
   git status --short --untracked-files=all >&2
   exit 1
 fi
-echo "✓ local runtime files ignored"
+echo "✓ Pi runtime files ignored"
 
 git status --short --untracked-files=all

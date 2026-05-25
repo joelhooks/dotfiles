@@ -32,9 +32,9 @@ Temporary Items
 # Local overrides
 *.local
 .env
+
+# Pi runtime state, not project Brain docs
 .pi/
-.brain/
-BRAIN.md
 
 # Backup files
 *.backup

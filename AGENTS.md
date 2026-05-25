@@ -13,7 +13,8 @@ This repo is the machine-shape source for Joel's macOS development setup. Treat 
 
 - Raw secrets, tokens, private keys, cert bodies, auth files, local session logs, model transcripts, or support/customer data.
 - Whole private agent prompts copied from `~/.pi`, `~/.claude`, or `~/.codex` without review.
-- Machine-local caches like `.pi/`, `.brain/`, `BRAIN.md`, run history, sqlite DBs, paste caches, or outboxes.
+- Machine-local caches like `.pi/`, run history, sqlite DBs, paste caches, notes-bridge state, or outboxes.
+- Private/global Brain material. Project `.brain/` and `BRAIN.md` are allowed here only when they describe this public dotfiles repo and pass the secret scan.
 
 Secrets go in `secrets` / agent-secrets and are leased only when a command needs them. Local one-offs go in `~/.zshrc.local`, which is intentionally gitignored.
 
@@ -36,7 +37,7 @@ If the change touches public docs, make sure the README matches the actual insta
 
 - Prefer small, boring commits with Conventional Commit prefixes.
 - Agent-authored GitHub writes should use ShitRat when the GitHub App has repo access.
-- Never `git add -A` blindly after running tools that create `.pi/`, `.brain/`, review output, or session artifacts.
+- Never `git add -A` blindly after running tools that create `.pi/`, review output, or session artifacts. Project `.brain/` files are okay when intentionally curated.
 - Before publishing public dotfiles, run a staged diff review focused on secrets and machine-local metadata.
 
 ## Machine taste rules
