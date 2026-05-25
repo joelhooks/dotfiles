@@ -2,17 +2,17 @@
 
 > A highly optimized macOS development environment featuring Zsh, Zellij, Ghostty, Atuin, Neovim, and Karabiner configurations.
 
-![Catppuccin Macchiato](https://img.shields.io/badge/theme-catppuccin%20macchiato-purple?style=for-the-badge)
+![Catppuccin Mocha](https://img.shields.io/badge/theme-catppuccin%20mocha-purple?style=for-the-badge)
 ![Zsh](https://img.shields.io/badge/shell-zsh-green?style=for-the-badge)
 ![macOS](https://img.shields.io/badge/os-macOS-blue?style=for-the-badge)
 
 ## 🎨 Preview
 
 This setup features:
-- **Catppuccin Macchiato** theme across all tools
-- **1 million line** scrollback in terminals
+- **Catppuccin Mocha/Macchiato** dark theme across the terminal stack
+- **1 million line** scrollback in Ghostty
 - **GPU-accelerated** terminal rendering
-- **Fuzzy history search** with context awareness
+- **Fuzzy history search** with workspace/directory filtering
 - **Advanced keyboard customization** with Karabiner
 - **Session persistence** with Zellij
 
@@ -138,7 +138,7 @@ Each tool includes comprehensive documentation:
 
 ## 🎨 Theme Consistency
 
-All tools are configured with **Catppuccin Macchiato** for a consistent look:
+The terminal stack uses **Catppuccin dark variants** for a consistent look:
 
 - Terminal colors
 - UI elements
@@ -172,8 +172,8 @@ Theme switchers are included for easy customization:
 ├── .zshrc                    # Zsh configuration
 ├── zellij/                   # Zellij configs
 │   ├── config.kdl           # Main config
-│   ├── layouts/             # Custom layouts
-│   ├── themes/              # Catppuccin themes
+│   ├── layouts/             # Home, mobile, and OpenCode layouts
+│   ├── themes/              # Optional Catppuccin themes
 │   └── zellij-sessionizer.sh # Project switcher
 ├── ghostty/                  # Ghostty terminal
 │   ├── config               # Main config

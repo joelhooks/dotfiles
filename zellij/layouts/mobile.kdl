@@ -1,0 +1,7 @@
+// Zero-chrome layout for phone SSH
+// Usage: zellij -l mobile -s phone
+//   then reattach: zellij a -s phone
+
+layout {
+    pane
+}

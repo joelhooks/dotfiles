@@ -15,8 +15,8 @@
 | Pane | `Ctrl+p` | Pane management |
 | Tab | `Ctrl+t` | Tab management |
 | Resize | `Ctrl+n` | Resize panes |
-| Move | `Alt+m` | Move panes |
-| Scroll | `Alt+s` | Scroll buffer |
+| Move | `Ctrl+h` | Move panes |
+| Scroll | `Ctrl+s` or `Alt+s` | Scroll buffer |
 | Session | `Ctrl+o` | Session management |
 
 **Exit any mode**: `Esc` (except Locked - use `Ctrl+g`)
@@ -29,9 +29,10 @@
 - `Alt+h/j/k/l` - Navigate panes (←↓↑→)
 - `Alt+[/]` - Previous/Next swap layout
 - `Alt+f` - Toggle floating panes
-- `Alt+1-9` - Go to tab 1-9
-- `Alt+w` - Close tab
-- `Alt+r` - Rename tab
+- `Alt+/` - Open Zellij configuration/keybind UI
+- `F1` - Personal Zellij key cheatsheet
+- `F2/F3` - KeyCoach drills for Zellij/Neovim
+- `F4/F5` - Reverse KeyCoach drills
 - `Alt+i/o` - Move tab left/right
 
 ### Pane Mode (`Ctrl+p`)
@@ -84,25 +85,23 @@ zja             # Attach to session
 zjl             # List sessions
 zjk             # Kill session
 zjka            # Kill all sessions
-zjd             # Start with dev layout
+zjh             # Start with home layout
+zjo             # Start with OpenCode layout
+zm              # Start phone-friendly mobile session
 zs              # Session switcher
 Ctrl+f          # Launch sessionizer
 ```
 
 ## Layouts
 
-### Default Layout
-- Single pane with tab/status bars
+### Home Layout (`zjh`)
+- Minimal compact bar with automatic swap layouts.
 
-### Dev Layout (`zjd`)
-```
-┌─────────────┬──────────┐
-│             │ Terminal │
-│   Editor    ├──────────┤
-│    (70%)    │   Logs   │
-└─────────────┴──────────┘
- [code] [git] [server]
-```
+### Mobile Layout (`zm`)
+- Zero-chrome single pane for phone SSH.
+
+### OpenCode Layout (`zjo`)
+- TUI pane plus server/shell panes for local OpenCode development.
 
 ## Command Line
 
@@ -116,8 +115,8 @@ zellij kill-session name           # Kill specific session
 zellij kill-all-sessions           # Kill all sessions
 
 # Layouts
-zellij --layout default            # Use default layout
-zellij --layout dev                # Use dev layout
+zellij --layout home               # Use home layout
+zellij --layout opencode           # Use OpenCode layout
 zellij --layout /path/to/layout    # Custom layout
 
 # Actions
@@ -133,11 +132,10 @@ zellij setup --dump-config         # Show default config
 ## Tips & Tricks
 
 1. **Project Sessions**: Use sessionizer (`Ctrl+f`) to create per-project sessions
-2. **Persistent Sessions**: Sessions survive disconnection (auto-serialized)
-3. **Copy Mode**: In scroll mode, select text with mouse (copy-on-select enabled)
-4. **Floating Panes**: `Alt+f` for temporary overlay panes
-5. **Sync Input**: In tab mode, press `s` to type in all panes
-6. **Quick Rename**: `Alt+r` to rename tabs on the fly
+2. **Persistent Sessions**: Sessions survive detach/reattach.
+3. **Copy Mode**: Use scroll mode and terminal selection for quick copying.
+4. **Floating Panes**: `Alt+f` for temporary overlay panes.
+5. **Sync Input**: In tab mode, press `s` to type in all panes.
 
 ## Configuration Locations
 
@@ -147,10 +145,10 @@ zellij setup --dump-config         # Show default config
 - Sessionizer: `~/.config/zellij/zellij-sessionizer.sh`
 
 ## Current Theme
-**Catppuccin Macchiato** 🎨
+**Catppuccin Mocha** 🎨
 
 Switch themes by editing `theme` in config.kdl:
 - `catppuccin-latte` (Light)
 - `catppuccin-frappe` (Medium)
-- `catppuccin-macchiato` (Current)
-- `catppuccin-mocha` (Dark) 
+- `catppuccin-macchiato` (Medium-dark)
+- `catppuccin-mocha` (Current) 

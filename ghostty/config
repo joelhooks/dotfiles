@@ -8,11 +8,12 @@ adjust-underline-thickness = -60%
 
 # Theme & Colors
 macos-icon = official
-theme = catppuccin-macchiato
+theme = catppuccin-mocha
 unfocused-split-opacity = 0.93
-unfocused-split-fill = #24273a
-selection-foreground = #cad3f5
-selection-background = #5b6078
+unfocused-split-fill = #1e1e2e
+selection-foreground = #cdd6f4
+selection-background = #585b70
+split-divider-color = #313244
 
 # Window Appearance
 window-width = 140

@@ -24,7 +24,6 @@ DISABLE_AUTO_UPDATE="true"  # Disable auto-update checks
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  z  # Jump around directories
   macos  # macOS specific utils
   brew  # Homebrew completions
   docker  # Docker completions
@@ -34,12 +33,24 @@ plugins=(
   zsh-syntax-highlighting  # Fish-like syntax highlighting
   fzf  # Fuzzy finder
 )
+# NOTE: removed z plugin - using zoxide instead (faster, smarter)
 
 # Load custom plugins (install these first)
 # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 source $ZSH/oh-my-zsh.sh
+
+# Turbo completions - only recompile if older than 24h
+autoload -Uz compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# zoxide - smarter cd (replaced z plugin)
+eval "$(zoxide init zsh)"
 
 # User configuration
 
@@ -81,6 +92,12 @@ setopt NO_FLOW_CONTROL
 setopt NO_MAIL_WARNING
 unsetopt BG_NICE
 
+# Make Ctrl+S usable for apps/muxers (eg. Zellij scroll mode) by disabling XON/XOFF.
+# macOS often has `ixon` enabled, which makes Ctrl+S "freeze" output instead of reaching apps.
+if [[ -t 0 ]]; then
+  stty -ixon
+fi
+
 # Enable better globbing
 setopt EXTENDED_GLOB
 setopt NULL_GLOB
@@ -89,11 +106,17 @@ setopt NULL_GLOB
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
-# Better ls aliases
-alias ls='ls -GF'
-alias ll='ls -lhAGF'
-alias la='ls -AGF'
-alias l='ls -CF'
+# Modern ls with eza (install: brew install eza)
+alias ls='eza --icons --group-directories-first'
+alias ll='eza -la --icons --git --group-directories-first'
+alias la='eza -a --icons --group-directories-first'
+alias l='eza -1 --icons'
+alias tree='eza --tree --icons -L 3 --git-ignore'
+
+# bat > cat (install: brew install bat)
+alias cat='bat --paging=never'
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export BAT_THEME="Catppuccin Macchiato"
 
 # macOS specific aliases
 alias showfiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
@@ -110,6 +133,12 @@ alias gdiff='git diff --color-words'
 alias gclean='git clean -fd && git checkout -- .'
 alias gnuke='git reset --hard && git clean -fd'
 
+# Git worktrees - parallel branch heaven
+alias gwt='git worktree'
+alias gwta='git worktree add'
+alias gwtl='git worktree list'
+alias gwtr='git worktree remove'
+
 # Development aliases
 alias dev='cd ~/Code'
 alias vim="nvim"
@@ -120,6 +149,12 @@ alias px="pnpm dlx"
 alias pdev="pnpm dev"
 alias pbuild="pnpm build"
 alias ptest="pnpm test"
+
+# Quick config editing
+alias zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
+alias nvimrc='$EDITOR ~/.config/nvim'
+alias ghosttyrc='$EDITOR "$HOME/Library/Application Support/com.mitchellh.ghostty/config"'
+alias zellijrc='$EDITOR ~/.config/zellij/config.kdl'
 
 # Docker aliases
 alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
@@ -141,9 +176,21 @@ alias zja='zellij attach'
 alias zjl='zellij list-sessions'
 alias zjk='zellij kill-session'
 alias zjka='zellij kill-all-sessions'
-alias zjd='zellij --layout dev'
+alias zjh='zellij --layout home'
+alias zjo='zellij --layout opencode'
+alias zm='zellij -l mobile -s phone'
 alias zs='~/.config/zellij/zellij-sessionizer.sh'
 bindkey -s '^f' 'zs\n'  # Ctrl+f to launch sessionizer
+
+# Codex TUI in terminal multiplexers:
+# Inline mode preserves scrollback in Zellij/tmux; alt-screen mode tends to eat it.
+codex() {
+  if [[ -n "${ZELLIJ:-}" || -n "${TMUX:-}" ]]; then
+    command codex --no-alt-screen "$@"
+  else
+    command codex "$@"
+  fi
+}
 
 # Useful functions
 mkd() { mkdir -p "$@" && cd "$_"; }
@@ -168,6 +215,11 @@ extract() {
     echo "'$1' is not a valid file"
   fi
 }
+
+# Port management - life savers
+whatport() { lsof -i ":$1" }
+killport() { lsof -ti ":$1" | xargs kill -9 2>/dev/null && echo "killed port $1" || echo "nothing on port $1" }
+ports() { lsof -iTCP -sTCP:LISTEN -n -P | tail -n +2 | awk '{print $9, $1}' | column -t }
 ht() {
   echo "🎨 Catppuccin Macchiato themes:"
   echo "1. Mauve (purple)"
@@ -192,7 +244,7 @@ ht() {
 autoload -U promptinit; promptinit
 prompt pure
 
-# fnm
+# fnm - node version manager
 FNM_PATH="$HOME/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
@@ -205,8 +257,8 @@ eval "$(atuin init zsh)"
 
 # Atuin key bindings
 bindkey '^r' atuin-search      # Ctrl+R for fuzzy history search
-bindkey '^[[A' atuin-up         # Up arrow for context-aware history
-bindkey '^[OA' atuin-up         # Up arrow (alternate)
+bindkey '^[[A' _atuin_search_widget  # Up arrow for context-aware history
+bindkey '^[OA' _atuin_search_widget  # Up arrow (alternate)
 
 # Atuin aliases
 alias h='atuin search'          # Quick history search
@@ -220,13 +272,47 @@ export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 export VISUAL="cursor"
 
-# FZF configuration
+# FZF configuration (install: brew install fzf fd)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --color=dark'
+
+# FZF previews - makes all the difference
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always --line-range :500 {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always --icons {} | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:wrap"
 
 # FZF shell integration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Load local config if exists
+# Public machine config
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/go/bin"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Bun PATH is set once near the end of this file so Bun-owned CLIs win
+# over fnm/npm/pnpm shims.
+
+# Added by Ultimate Bug Scanner Installer
+alias bash='/opt/homebrew/bin/bash'
+
+export PI_LLM_MODEL="anthropic/claude-sonnet-4-5"
+
+# Swarm plugin pretty logging
+export SWARM_LOG_PRETTY=1
+export SWARM_DEBUG_MODE=1
+
+# bun - canonical global JS CLI toolchain; Pi lives in ~/.bun/bin/pi.
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# Private/local exports belong in ~/.zshrc.local (gitignored): tokens, customer app
+# credentials, SAML material, and machine-specific one-offs stay out of public dotfiles.
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

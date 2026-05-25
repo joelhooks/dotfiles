@@ -1,0 +1,35 @@
+// OpenCode multi-pane layout (uses dev version)
+// Usage: zellij --layout opencode
+// Or from within zellij: zellij action new-tab --layout opencode
+
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+
+    tab name="opencode" focus=true {
+        pane split_direction="vertical" {
+            // Left: Main TUI (60%)
+            pane size="60%" name="tui" {
+                command "zsh"
+                args "-l" "-c" "sleep 3 && opencode attach http://127.0.0.1:4096"
+            }
+            // Right: Server + Shell (40%)
+            pane size="40%" split_direction="horizontal" {
+                // Top right: Headless server (dev version)
+                pane size="30%" name="server" {
+                    command "zsh"
+                    args "-l" "-c" "cd \"${OPENCODE_DEV_DIR:-$HOME/Code/sst/opencode/packages/opencode}\" && bun dev serve --port 4096"
+                }
+                // Bottom right: Shell for ad-hoc commands
+                pane size="70%" name="shell" focus=true
+            }
+        }
+    }
+}

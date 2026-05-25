@@ -4,7 +4,7 @@
 A fast, feature-rich terminal emulator written in Zig with native GPU acceleration.
 
 ## Current Theme
-**Catppuccin Macchiato** 🎨 (aligned with Atuin & Zellij)
+**Catppuccin Mocha** 🎨 (aligned with Zellij)
 
 ## Essential Keybindings
 
@@ -56,7 +56,7 @@ font-thicken = true
 
 #### Theme & Appearance
 ```
-theme = catppuccin-macchiato
+theme = catppuccin-mocha
 background-opacity = 0.97
 background-blur-radius = 25
 macos-titlebar-style = transparent
