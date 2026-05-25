@@ -31,8 +31,6 @@
 - `Alt+f` - Toggle floating panes
 - `Alt+/` - Open Zellij configuration/keybind UI
 - `F1` - Personal Zellij key cheatsheet
-- `F2/F3` - KeyCoach drills for Zellij/Neovim
-- `F4/F5` - Reverse KeyCoach drills
 - `Alt+i/o` - Move tab left/right
 
 ### Pane Mode (`Ctrl+p`)
@@ -151,4 +149,4 @@ Switch themes by editing `theme` in config.kdl:
 - `catppuccin-latte` (Light)
 - `catppuccin-frappe` (Medium)
 - `catppuccin-macchiato` (Medium-dark)
-- `catppuccin-mocha` (Current) 
+- `catppuccin-mocha` (Current)

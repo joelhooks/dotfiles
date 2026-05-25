@@ -79,6 +79,10 @@ cd ~/Code/joelhooks/dotfiles
 ./install.sh
 ```
 
+`install.sh` is idempotent and resumable: reruns skip files that already match,
+repair incomplete plugin installs, and create backups only before replacing
+changed managed paths.
+
 ### Manual Installation
 
 Each tool can be installed individually by copying its config files to the appropriate location. See the [install script](install.sh) for details.

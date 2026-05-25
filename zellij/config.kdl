@@ -157,57 +157,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        // Spaced repetition drill for Zellij keys.
-        bind "F2" {
-            Run "bash" "-lc" "keycoach review zellij --limit 12" {
-                floating true
-                pinned true
-                width "90%"
-                height "80%"
-                x "5%"
-                y "10%"
-                close_on_exit true
-            }
-            SwitchToMode "normal"
-        }
-        // Spaced repetition drill for Neovim keys.
-        bind "F3" {
-            Run "bash" "-lc" "keycoach review nvim --limit 12" {
-                floating true
-                pinned true
-                width "90%"
-                height "80%"
-                x "5%"
-                y "10%"
-                close_on_exit true
-            }
-            SwitchToMode "normal"
-        }
-        // Reverse drills (prompt=keys, answer=meaning)
-        bind "F4" {
-            Run "bash" "-lc" "keycoach review zellij-reverse --limit 12" {
-                floating true
-                pinned true
-                width "90%"
-                height "80%"
-                x "5%"
-                y "10%"
-                close_on_exit true
-            }
-            SwitchToMode "normal"
-        }
-        bind "F5" {
-            Run "bash" "-lc" "keycoach review nvim-reverse --limit 12" {
-                floating true
-                pinned true
-                width "90%"
-                height "80%"
-                x "5%"
-                y "10%"
-                close_on_exit true
-            }
-            SwitchToMode "normal"
-        }
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }

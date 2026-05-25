@@ -6,10 +6,6 @@ This is based on `~/.config/zellij/config.kdl` (not Zellij defaults).
 
 - Built-in config UI (shows keybinds): `Alt /`
 - This cheat sheet: `F1`
-- Key drill (spaced repetition): `F2`
-- Key drill (nvim): `F3`
-- Reverse drill (zellij): `F4`
-- Reverse drill (nvim): `F5`
 - Lock/unlock: `Ctrl g`
 - Quit: `Ctrl q`
 

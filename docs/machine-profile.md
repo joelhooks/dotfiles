@@ -8,7 +8,7 @@ This is the map for turning a fresh macOS box into Joel's working machine withou
 - **Git/GitHub:** Joel identity, `main` as default branch, GitHub SSH protocol, ShitRat for agent-authored GitHub writes.
 - **Navigation/search:** `zoxide`, `fd`, `fzf`, `eza`, `bat`, Atuin.
 - **Terminal:** Ghostty with Catppuccin Mocha, 1M scrollback, split/tab keybinds.
-- **Mux:** Zellij with `home`, `mobile`, and `opencode` layouts plus keycoach drills.
+- **Mux:** Zellij with `home`, `mobile`, and `opencode` layouts.
 - **Editor:** Neovim config under `nvim/` with lazy lockfile.
 - **Runtimes:** `fnm` current LTS Node, Corepack/pnpm, Bun, `uv`/Python 3.12.
 - **Local data:** Postgres 17 and Valkey/Redis available, not forced always-on.
@@ -56,7 +56,7 @@ A useful fresh-machine flow should be boring:
 
 1. Install Homebrew packages and GUI apps with `./scripts/bootstrap-macos.sh`.
 2. Clone `joelhooks/dotfiles`.
-3. Run `./install.sh`.
+3. Run `./install.sh`; it is safe to rerun after partial setup failures.
 4. Apply Git/GitHub defaults with `./scripts/bootstrap-git-gh.sh`.
 5. Install/update primary repos with `./scripts/bootstrap-repos.sh`.
 6. Install runtimes with `./scripts/bootstrap-runtimes.sh`.
