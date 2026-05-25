@@ -102,6 +102,7 @@ Each tool includes comprehensive documentation:
 - [Secrets Registry](docs/secrets-registry.md) - Secret names and env mappings without values
 - [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) - Agent workflow for safe changes
 - [Agent tool bootstrap check](scripts/bootstrap-agent-tools.sh) - verifies Pi/Codex/Claude/OpenCode/ShitRat/secrets/JoelClaw are present
+- [ShitRat personal inbox setup](docs/shitrat-personal-inbox-setup.md) - sanitized skill install and runtime cache sync shape
 
 ## ⚡ Key Features
 
