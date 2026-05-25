@@ -1,0 +1,16 @@
+# ~/.zshrc.local
+# Private machine-only helpers live here. This file is an example and should not contain real secrets.
+
+# Use secrets leases instead of raw exports.
+# load-pi-llm-secret 30m
+# load-agent-axiom-secret 30m
+
+# Project-local helper example.
+# log-beast() {
+#   local cli="${LOG_BEAST_CLI:-$HOME/Code/skillrecordings/log-beast/src/cli.ts}"
+#   [[ -f "$cli" ]] || { echo "missing log-beast CLI: $cli" >&2; return 1; }
+#   with-agent-axiom bun run "$cli" "$@"
+# }
+
+# Machine-local paths or service URLs can go here.
+# export OPENCODE_DEV_DIR="$HOME/Code/sst/opencode/packages/opencode"

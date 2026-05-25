@@ -1,0 +1,16 @@
+{
+  "description": "Public-safe Claude Code settings template. Do not copy live auth, caches, paste-cache, shell snapshots, session env, or project transcripts.",
+  "modelPolicy": {
+    "approvedModels": ["openai-codex/gpt-5.5", "anthropic/claude-opus-4.6"],
+    "note": "Use this as policy documentation; actual Claude model identifiers may differ by harness."
+  },
+  "hooks": {
+    "preToolUse": [],
+    "postToolUse": []
+  },
+  "safeDefaults": {
+    "dangerousPermissionBypass": false,
+    "copyAuthFiles": false,
+    "copyCaches": false
+  }
+}

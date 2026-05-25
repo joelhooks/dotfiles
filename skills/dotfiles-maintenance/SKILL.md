@@ -13,9 +13,12 @@ This repo is Joel's executable machine taste. Keep it useful for a fresh machine
 ./sync-from-system.sh
 ./scripts/doctor.sh
 ./scripts/bootstrap-agent-tools.sh
+# Optional focused checks when relevant:
+./scripts/bootstrap-git-gh.sh
+./scripts/bootstrap-network-trust.sh
 ```
 
-The doctor script runs syntax checks, Zellij config validation, an obvious secret scan, and local runtime-file checks. The bootstrap check verifies the agent toolchain without copying auth files.
+The doctor script runs syntax checks, Zellij config validation, JSON template validation, an obvious secret scan, and local runtime-file checks. The bootstrap checks verify focused parts of the machine without copying auth files.
 
 ## Secret rule
 
@@ -34,8 +37,8 @@ Local/private exports belong in `~/.zshrc.local`, not `.zshrc`.
 
 1. Identify the real source path on the machine.
 2. Decide if it is safe to publish directly, needs a redacted template, or belongs only in docs.
-3. Add install and sync paths together.
-4. Update README or `docs/machine-profile.md` when the user-facing setup changes.
+3. Add install, sync, bootstrap, and doctor paths together when relevant.
+4. Update README, `docs/machine-profile.md`, or `docs/provisioning-backlog.md` when the user-facing setup changes.
 5. Validate syntax and run a secret/local-metadata scan.
 
 ## Agent tooling configs

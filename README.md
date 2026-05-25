@@ -94,6 +94,8 @@ Each tool includes comprehensive documentation:
 - [Neovim Configuration](nvim/) - Editor keybindings
 - [Karabiner Documentation](karabiner/) - Keyboard layers
 - [Machine Profile](docs/machine-profile.md) - Agentic setup map
+- [Provisioning Backlog](docs/provisioning-backlog.md) - Fresh-machine setup backlog
+- [Secrets Registry](docs/secrets-registry.md) - Secret names and env mappings without values
 - [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) - Agent workflow for safe changes
 - [Agent tool bootstrap check](scripts/bootstrap-agent-tools.sh) - verifies Pi/Codex/Claude/OpenCode/ShitRat/secrets/JoelClaw are present
 
@@ -166,7 +168,7 @@ Theme switchers are included for easy customization:
 ## 🔧 Requirements
 
 ### Required Tools
-- [Homebrew](https://brew.sh)
+- [Homebrew](https://brew.sh) plus [`Brewfile`](Brewfile)
 - [Oh My Zsh](https://ohmyz.sh)
 - [Zellij](https://zellij.dev)
 - [Ghostty](https://ghostty.org)
@@ -174,6 +176,7 @@ Theme switchers are included for easy customization:
 - [Neovim](https://neovim.io) (`brew install neovim`)
 - [Karabiner-Elements](https://karabiner-elements.pqrs.org)
 - [Goku](https://github.com/yqrashawn/GokuRakuJoudo) (for Karabiner EDN)
+- `fnm`, `uv`, Bun, pnpm, GitHub CLI, AWS CLI v2, Postgres 17, and Valkey/Redis via `./scripts/bootstrap-macos.sh`
 
 ### Fonts
 - [Dank Mono](https://dank.sh) (primary)
@@ -199,9 +202,12 @@ Theme switchers are included for easy customization:
 │   └── karabiner.edn        # Goku config
 ├── nvim/                     # Neovim config
 │   └── init.lua             # kickstart.nvim based
-├── docs/                     # Machine profile and setup notes
+├── docs/                     # Machine profile, setup notes, secrets registry
+├── manifests/                # Repo manifests for clone/update scripts
+├── templates/                # Public-safe agent/AWS/zsh templates
 ├── skills/                   # Agent skills for maintaining this setup
-├── scripts/                  # Doctor and agent-tool check helpers
+├── scripts/                  # Doctor and bootstrap helpers
+├── Brewfile                  # Homebrew bundle baseline
 ├── AGENTS.md                 # Agent instructions for this repo
 └── install.sh               # Installation script
 ```
@@ -214,8 +220,15 @@ Theme switchers are included for easy customization:
    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
    ```
-3. **Compile Karabiner config**: `goku`
-4. **Start using the tools**:
+3. **Apply optional bootstrap layers** as needed:
+   ```bash
+   ./scripts/bootstrap-git-gh.sh
+   ./scripts/bootstrap-runtimes.sh
+   ./scripts/bootstrap-agent-tools.sh
+   ./scripts/doctor.sh
+   ```
+4. **Compile Karabiner config**: `goku`
+5. **Start using the tools**:
    - Launch Zellij: `zj`
    - Search history: `Ctrl+r`
    - Switch projects: `Ctrl+f`

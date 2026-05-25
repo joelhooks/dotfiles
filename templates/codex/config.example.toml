@@ -1,0 +1,15 @@
+# Public-safe Codex config template.
+# Do not copy ~/.codex/auth.json, sqlite DBs, sessions, history, or caches.
+
+model = "openai-codex/gpt-5.5"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"
+
+[tools]
+web_search = true
+
+[projects]
+default_root = "~/Code"
+
+[notes]
+keep = "Put durable project knowledge in Brain/.brain, not Codex session state."

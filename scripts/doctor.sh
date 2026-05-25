@@ -8,7 +8,12 @@ echo "🔎 dotfiles doctor"
 zsh -n .zshrc
 echo "✓ .zshrc syntax"
 
-for script in install.sh sync-from-system.sh scripts/doctor.sh scripts/bootstrap-agent-tools.sh; do
+script_files=(install.sh sync-from-system.sh)
+while IFS= read -r script; do
+  script_files+=("$script")
+done < <(find scripts -type f -name '*.sh' | sort)
+
+for script in "${script_files[@]}"; do
   bash -n "$script"
 done
 echo "✓ shell scripts syntax"
@@ -18,6 +23,22 @@ if command -v zellij >/dev/null 2>&1; then
   echo "✓ zellij config"
 else
   echo "⚠ zellij missing, skipped config check"
+fi
+
+if command -v python3 >/dev/null 2>&1; then
+  python3 - <<'PY'
+import json
+from pathlib import Path
+for path in Path('templates').rglob('*.json'):
+    json.loads(path.read_text())
+PY
+  echo "✓ JSON templates"
+fi
+
+if command -v brew >/dev/null 2>&1 && [[ -f Brewfile ]]; then
+  brew bundle check --no-upgrade --file Brewfile >/tmp/dotfiles-brew-bundle-check.log 2>&1 \
+    && echo "✓ Brewfile satisfied" \
+    || echo "⚠ Brewfile has missing deps; run ./scripts/bootstrap-macos.sh when ready"
 fi
 
 scan_files=()

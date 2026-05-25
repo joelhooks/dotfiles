@@ -1,0 +1,22 @@
+# Public-safe AWS config template. Copy to ~/.aws/config, then run `aws configure sso`.
+# Never commit ~/.aws/credentials, SSO caches, access keys, or session tokens.
+
+[default]
+region = us-east-1
+output = json
+
+# Example SSO profile. Replace placeholders locally.
+[profile joel]
+sso_start_url = https://YOUR-AWS-ORG.awsapps.com/start
+sso_region = us-east-1
+sso_account_id = 000000000000
+sso_role_name = AdministratorAccess
+region = us-east-1
+output = json
+
+# Example named production profile shape. Keep actual account/role choices local if sensitive.
+[profile production]
+source_profile = joel
+role_arn = arn:aws:iam::000000000000:role/OrganizationAccountAccessRole
+region = us-east-1
+output = json

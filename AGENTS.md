@@ -25,9 +25,12 @@ When updating from the current machine:
 ./sync-from-system.sh
 ./scripts/doctor.sh
 ./scripts/bootstrap-agent-tools.sh
+# Optional focused checks when relevant:
+./scripts/bootstrap-git-gh.sh
+./scripts/bootstrap-network-trust.sh
 ```
 
-If the change touches public docs, make sure the README matches the actual installed files. If the change touches Zellij keybinds, every referenced file or command must either be committed or documented as optional.
+If the change touches public docs, make sure the README matches the actual installed files. If the change touches Zellij keybinds, every referenced file or command must either be committed or documented as optional. If the change adds a bootstrap concern, add the doctor/syntax path too.
 
 ## Commit/publish rules
 
@@ -38,6 +41,7 @@ If the change touches public docs, make sure the README matches the actual insta
 
 ## Machine taste rules
 
+- Bootstrap scripts should be idempotent and non-destructive unless the name clearly says it applies settings.
 - Fast shell startup beats ornamental shell ceremony.
 - Terminal UX should preserve scrollback and make panes/tabs boringly easy.
 - Atkinson/Geist/Atuin/Zellij/Ghostty/Neovim choices should serve readability and flow, not screenshot cosplay.

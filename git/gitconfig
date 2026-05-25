@@ -1,0 +1,47 @@
+# Public-safe Git defaults for Joel machines.
+# Install/apply with: ./scripts/bootstrap-git-gh.sh
+
+[user]
+	name = Joel Hooks
+	email = joelhooks@gmail.com
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+
+[rerere]
+	enabled = true
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+
+[merge]
+	conflictstyle = zdiff3
+
+[commit]
+	verbose = true
+
+[core]
+	editor = nvim
+
+[alias]
+	st = status --short --branch
+	lg = log --graph --decorate --oneline --all
+	co = checkout
+	br = branch

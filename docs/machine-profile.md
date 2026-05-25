@@ -5,10 +5,15 @@ This is the map for turning a fresh macOS box into Joel's working machine withou
 ## Core stack
 
 - **Shell:** Zsh, Oh My Zsh, Pure prompt, `fnm`, Bun, pnpm.
+- **Git/GitHub:** Joel identity, `main` as default branch, GitHub SSH protocol, ShitRat for agent-authored GitHub writes.
 - **Navigation/search:** `zoxide`, `fd`, `fzf`, `eza`, `bat`, Atuin.
 - **Terminal:** Ghostty with Catppuccin Mocha, 1M scrollback, split/tab keybinds.
 - **Mux:** Zellij with `home`, `mobile`, and `opencode` layouts plus keycoach drills.
 - **Editor:** Neovim config under `nvim/` with lazy lockfile.
+- **Runtimes:** `fnm` current LTS Node, Corepack/pnpm, Bun, `uv`/Python 3.12.
+- **Local data:** Postgres 17 and Valkey/Redis available, not forced always-on.
+- **Cloud:** AWS CLI v2 with SSO config templates, `wrangler`, `vercel`, `gh`; credentials stay private.
+- **Network trust:** Tailscale, `mkcert`, and portless trust checks.
 - **Keyboard:** Karabiner/Goku config.
 - **Agent tools:** Pi, Claude Code, Codex, OpenCode, ShitRat, JoelClaw, agent-secrets.
 
@@ -41,16 +46,23 @@ Useful candidates for future dotfiles work, but sanitize before committing:
 - `~/.agents/memory/*.md` only when the note is generally useful and not private/customer-specific.
 - JoelClaw install/bootstrap docs, not `.joelclaw/outbox` or runtime state.
 
+## Provisioning backlog
+
+See [Provisioning Backlog](provisioning-backlog.md) for the concrete next pieces and what's already scaffolded: Git/GitHub defaults, primary repo manifest, AWS templates, Redis/Postgres, `uv`/Python, `fnm` LTS Node, Mac defaults, and safe agent harness templates.
+
 ## Bootstrap shape worth building next
 
 A useful fresh-machine flow should be boring:
 
-1. Install Homebrew packages and GUI apps.
+1. Install Homebrew packages and GUI apps with `./scripts/bootstrap-macos.sh`.
 2. Clone `joelhooks/dotfiles`.
 3. Run `./install.sh`.
-4. Install/doctor Pi, Claude, Codex, ShitRat, JoelClaw, and `secrets`.
-5. Restore only named secrets via `secrets`, never raw `.env` dumps.
-6. Run `./scripts/doctor.sh` and `./scripts/bootstrap-agent-tools.sh` to check commands, symlinks, Zellij config, shell syntax, agent CLIs, and ignored private paths.
+4. Apply Git/GitHub defaults with `./scripts/bootstrap-git-gh.sh`.
+5. Install/update primary repos with `./scripts/bootstrap-repos.sh`.
+6. Install runtimes with `./scripts/bootstrap-runtimes.sh`.
+7. Install/doctor Pi, Claude, Codex, ShitRat, JoelClaw, and `secrets`.
+8. Restore only named secrets via `secrets`, never raw `.env` dumps.
+9. Run `./scripts/doctor.sh`, `./scripts/bootstrap-agent-tools.sh`, and the focused bootstrap checks you need.
 
 ## Red lines
 

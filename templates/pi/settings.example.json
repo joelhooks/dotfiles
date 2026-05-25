@@ -1,0 +1,26 @@
+{
+  "$schema": "https://example.invalid/pi-settings.schema.json",
+  "description": "Public-safe Pi settings template. Copy ideas, not auth/cache/session state.",
+  "models": {
+    "default": "openai-codex/gpt-5.5",
+    "approved": ["openai-codex/gpt-5.5", "anthropic/claude-opus-4.6"]
+  },
+  "extensions": [
+    "pi-subagents",
+    "pi-notes",
+    "pi-cmux",
+    "pi-feedback",
+    "pi-tools",
+    "pi-effect"
+  ],
+  "skills": [
+    "dotfiles-maintenance",
+    "pi-subagents",
+    "joel-writing-style",
+    "cmux-workspace-naming"
+  ],
+  "notes": [
+    "Do not copy ~/.pi/agent/auth.json, run-history, crash logs, sessions, or notes-bridge runtime files.",
+    "Install real packages through the private Pi package flow, then run pi doctor/status commands."
+  ]
+}

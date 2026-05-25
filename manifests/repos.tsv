@@ -1,0 +1,13 @@
+# owner/repo	path	visibility	purpose
+joelhooks/dotfiles	~/Code/joelhooks/dotfiles	public	machine profile and dotfiles
+joelhooks/dark-wizard	~/Code/joelhooks/dark-wizard	private	system Brain backing ~/.brain symlink
+joelhooks/pi-mono	~/Code/joelhooks/pi-mono	private	Pi coding agent core
+joelhooks/pi-tools	~/Code/joelhooks/pi-tools	private	Pi custom tools and Linear tracker helper
+joelhooks/pi-notes	~/Code/joelhooks/pi-notes	private	Brain document host and review docs
+joelhooks/pi-cmux	~/Code/joelhooks/pi-cmux	private	cmux/Pi integration
+joelhooks/pi-feedback	~/Code/joelhooks/pi-feedback	private	Pi feedback workflow
+joelhooks/shitrat-cli	~/Code/joelhooks/shitrat-cli	private	ShitRat GitHub/inbox/familiar CLI
+joelhooks/joelclaw	~/Code/joelhooks/joelclaw	private	JoelClaw command and gateway system
+badass-courses/second-brain	~/Code/badass-courses/second-brain	private	Forte/PARA doctrine corpus
+badass-courses/badass-courses	~/Code/badass-courses/badass-courses	private	Badass Courses app/content system
+skillrecordings/products	~/Code/skillrecordings/products	private	Skill Recordings product monorepo
