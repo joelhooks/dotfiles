@@ -16,6 +16,7 @@ This is the map for turning a fresh macOS box into Joel's working machine withou
 - **Network trust:** Tailscale, `mkcert`, and portless trust checks.
 - **Keyboard:** Karabiner/Goku config.
 - **Agent tools:** Pi, Claude Code, Codex, OpenCode, ShitRat, JoelClaw, agent-secrets.
+- **Agent skills:** cataloged by [Agent Skills Catalog](agent-skills.md), with source roots in `manifests/agent-skill-roots.tsv` and curated links in `manifests/agent-skill-install.tsv`.
 
 ## Secret handling
 
@@ -62,10 +63,12 @@ A useful fresh-machine flow should be boring:
 6. Install runtimes with `./scripts/bootstrap-runtimes.sh`.
 7. Install/doctor Pi, Claude, Codex, ShitRat, JoelClaw, and `secrets`.
 8. Restore only named secrets via `secrets`, never raw `.env` dumps.
-9. Run `./scripts/doctor.sh`, `./scripts/bootstrap-agent-tools.sh`, and the focused bootstrap checks you need.
+9. Inventory and dry-run skill links with `./scripts/catalog-agent-skills.sh --markdown` and `./scripts/bootstrap-agent-skills.sh`. Treat upstream skills as fork inputs; install Joel-adapted private skills from `dark-wizard` when Brain/pi-notes/session-history behavior matters.
+10. Run `./scripts/doctor.sh`, `./scripts/bootstrap-agent-tools.sh`, and the focused bootstrap checks you need.
 
 ## Red lines
 
 - Do not commit `.pi/`, `.brain/`, `BRAIN.md`, `.claude` caches, `.codex` DBs, or `.joelclaw/outbox`.
 - Do not hardcode Tailscale IPs, local ports, or repo paths in public config unless they are parameterized.
 - Do not make public install scripts disable permission prompts or bypass safety gates by default.
+- Do not write skill links through a consumer root that is itself a symlink. Convert the root deliberately first, or you will mutate the linked source repo by accident.

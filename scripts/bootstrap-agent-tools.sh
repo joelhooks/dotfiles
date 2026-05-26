@@ -28,6 +28,11 @@ if command -v joelclaw >/dev/null 2>&1; then
   joelclaw status >/dev/null && echo '✓ joelclaw status responds'
 fi
 
+if [[ -x ./scripts/catalog-agent-skills.sh ]]; then
+  ./scripts/catalog-agent-skills.sh --summary >/tmp/dotfiles-agent-skill-summary.tsv
+  echo '✓ agent skill roots catalog can be read'
+fi
+
 if (( ${#missing[@]} > 0 )); then
   echo
   echo 'Missing agent tools:' "${missing[*]}"

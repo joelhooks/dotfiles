@@ -1,0 +1,19 @@
+# id	scope	status	path	role	notes
+joelclaw	owned	active	$HOME/Code/joelhooks/joelclaw/skills	source	Operational JoelClaw, gateway, pi, memory, and system skills; source present but consumer links are disabled on this machine.
+badass-courses	owned	active	$HOME/Code/badass-courses/skills	source	Strategy, writing, launch, Forte/PARA/JITPM, and course-building skills. Some skills depend on private corpora.
+mattpocock	upstream	active	$HOME/Code/mattpocock/skills/skills	source	Small engineering workflow skills. Track upstream, then adapt/fork only when local harness policy differs.
+skillrecordings-support	owned	active	$HOME/Code/skillrecordings/support/skills	source	Support, incident, Effect, and customer-response skills for Skill Recordings systems.
+dark-wizard	owned	active	$HOME/Code/joelhooks/dark-wizard/skills	source	Private personal/operator skills, including Matt workflow forks with Brain/pi-notes/SVX behavior; do not copy runtime state.
+marketing-skills	upstream	active	$HOME/Code/coreyhaines31/marketingskills/skills	source	Marketing, SEO, lifecycle, CRO, pricing, and growth skills.
+vercel-agent-skills	upstream	active	$HOME/Code/vercel-labs/agent-skills/skills	source	Vercel/react/web design skills.
+codex-user	consumer	active	$HOME/.codex/skills	consumer	Codex user skills. Contains local real dirs plus symlinks, including some stale links.
+codex-plugin-cache	consumer	active	$HOME/.codex/plugins/cache	consumer	Codex plugin-provided skills. Cache, not canonical source.
+claude-user	consumer	active	$HOME/.claude/skills	consumer	Claude Code user skills. Mixed real dirs and symlinks; current machine has many broken legacy links.
+agents-user	consumer	active	$HOME/.agents/skills	consumer	Real mixed consumer directory on this machine; currently holds only selected dark-wizard Matt/SVX skill links, with joelclaw consumer links removed.
+pi-agent	consumer	active	$HOME/.pi/agent/skills	consumer	Real machine-local Pi skill directory on this machine; currently empty after removing joelclaw consumer links.
+pi-user	consumer	active	$HOME/.pi/skills	consumer	Small Pi user-level skill dir with legacy symlinks.
+opencode-user	consumer	active	$HOME/.opencode/skills	consumer	OpenCode user skill dir with legacy symlinks.
+opencode-config-skill	consumer	active	$HOME/.config/opencode/skill	consumer	OpenCode config skill dir from dark-wizard style setup.
+opencode-config-skills	consumer	active	$HOME/.config/opencode/skills	consumer	OpenCode plural skills dir for Macroscope/ui skills.
+agents-lock	receipt	active	$HOME/.agents/.skill-lock.json	lock	Legacy skills.sh install lock; useful for source provenance even when symlinks are stale.
+dark-wizard-snapshot	archive	active	$HOME/Documents/dark-wizard-session-stores/20260523-082957/opencode/config	archive	Dark-wizard opencode config snapshot with skills, commands, agents, tools, and knowledge docs.

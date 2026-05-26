@@ -1,0 +1,15 @@
+# upstream	source_path	local_name	status	adaptation_notes
+mattpocock	$HOME/Code/mattpocock/skills/skills/productivity/handoff	handoff	adapted-in-dark-wizard	Use durable Brain/pi-notes/project docs instead of mktemp as canonical handoff.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/triage	triage	adapted-in-dark-wizard	Make Brain and source receipts canonical; trackers are mirrors; read full bodies and session history.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/diagnose	diagnose	adapted-in-dark-wizard	Keep feedback-loop discipline; add logs, pi sessions, Brain, and machine/runtime receipts.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/to-prd	to-prd	adapted-in-dark-wizard	Write Brain/project PRDs before tracker artifacts.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/to-issues	to-issues	adapted-in-dark-wizard	Create vertical AFK/HITL slices from Brain/project source notes.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/zoom-out	zoom-out	adapted-in-dark-wizard	Include dotfiles, pi-notes, ~/.brain, and session history in the map.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/improve-codebase-architecture	improve-codebase-architecture	adapted-in-dark-wizard	Ground architecture candidates in Brain/ADRs/session friction, not only CONTEXT.md.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/setup-matt-pocock-skills	setup-matt-pocock-skills	adapted-in-dark-wizard	Keep compatibility trigger but configure Joel Brain/tracker/domain/session policy.
+mattpocock	$HOME/Code/mattpocock/skills/skills/productivity/write-a-skill	write-a-skill	adapted-in-dark-wizard	Use local skill roots and dotfiles install manifests; upstream is only basis.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/grill-with-docs	grill-with-docs	adapted-in-dark-wizard	Use Brain SVX/project docs as first-class durable surfaces instead of vanilla CONTEXT/ADR only.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/tdd	tdd	adapted-in-dark-wizard	Keep red-green-refactor; add SVX Brain capture for durable interface/test decisions.
+mattpocock	$HOME/Code/mattpocock/skills/skills/engineering/prototype	prototype	adapted-in-dark-wizard	Keep throwaway prototype flow; capture the answered question/verdict in Brain SVX before cleanup.
+mattpocock	$HOME/Code/mattpocock/skills/skills/productivity/grill-me	grill-me	adapted-in-dark-wizard	Ask one question at a time; inspect code/Brain first and capture durable answers in SVX.
+mattpocock	$HOME/Code/mattpocock/skills/skills/productivity/caveman	caveman	adapted-in-dark-wizard	Keep compression mode; preserve exact SVX frontmatter/artifact formats.

@@ -8,6 +8,11 @@ joelhooks/pi-cmux	~/Code/joelhooks/pi-cmux	private	cmux/Pi integration
 joelhooks/pi-feedback	~/Code/joelhooks/pi-feedback	private	Pi feedback workflow
 joelhooks/shitrat-cli	~/Code/joelhooks/shitrat-cli	private	ShitRat GitHub/inbox/familiar CLI
 joelhooks/joelclaw	~/Code/joelhooks/joelclaw	private	JoelClaw command and gateway system
+badass-courses/skills	~/Code/badass-courses/skills	private	Badass Courses strategy and execution skill pack
 badass-courses/second-brain	~/Code/badass-courses/second-brain	private	Forte/PARA doctrine corpus
 badass-courses/badass-courses	~/Code/badass-courses/badass-courses	private	Badass Courses app/content system
+coreyhaines31/marketingskills	~/Code/coreyhaines31/marketingskills	public	Marketing, SEO, lifecycle, and growth skill pack
+mattpocock/skills	~/Code/mattpocock/skills	public	Matt Pocock engineering workflow skills
+skillrecordings/support	~/Code/skillrecordings/support	private	Skill Recordings support and incident skill pack
 skillrecordings/products	~/Code/skillrecordings/products	private	Skill Recordings product monorepo
+vercel-labs/agent-skills	~/Code/vercel-labs/agent-skills	public	Vercel frontend and deployment skill pack

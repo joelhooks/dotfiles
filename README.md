@@ -67,6 +67,7 @@ This setup features:
 ### Agentic Machine Setup
 - [AGENTS.md](AGENTS.md) tells agents how to maintain this repo without leaking local runtime sludge.
 - [Machine Profile](docs/machine-profile.md) maps what belongs here vs what stays private.
+- [Agent Skills Catalog](docs/agent-skills.md) maps skill sources, consumer dirs, broken links, and the repeatable install policy for Pi/Codex/OpenCode/Claude.
 - [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) is a portable skill for syncing, reviewing, and extending the setup.
 
 ## 🛠 Installation
@@ -98,10 +99,14 @@ Each tool includes comprehensive documentation:
 - [Neovim Configuration](nvim/) - Editor keybindings
 - [Karabiner Documentation](karabiner/) - Keyboard layers
 - [Machine Profile](docs/machine-profile.md) - Agentic setup map
+- [Agent Skills Catalog](docs/agent-skills.md) - Skill roots, high-leverage installs, and consumer repair notes
 - [Provisioning Backlog](docs/provisioning-backlog.md) - Fresh-machine setup backlog
 - [Secrets Registry](docs/secrets-registry.md) - Secret names and env mappings without values
 - [Dotfiles Maintenance Skill](skills/dotfiles-maintenance/SKILL.md) - Agent workflow for safe changes
 - [Agent tool bootstrap check](scripts/bootstrap-agent-tools.sh) - verifies Pi/Codex/Claude/OpenCode/ShitRat/secrets/JoelClaw are present
+- [Agent skill catalog](scripts/catalog-agent-skills.sh) - inventories skill roots and broken consumer symlinks
+- [Agent skill bootstrap](scripts/bootstrap-agent-skills.sh) - dry-run-first curated symlink installer for Pi/Codex/OpenCode/Claude
+- [Agent skill fork basis](manifests/agent-skill-fork-basis.tsv) - tracks upstream skills used as adaptation inputs, especially Matt Pocock skills forked for Brain/pi-notes/session-history workflows
 - [ShitRat personal inbox setup](docs/shitrat-personal-inbox-setup.md) - sanitized skill install and runtime cache sync shape
 
 ## ⚡ Key Features
@@ -230,6 +235,8 @@ Theme switchers are included for easy customization:
    ./scripts/bootstrap-git-gh.sh
    ./scripts/bootstrap-runtimes.sh
    ./scripts/bootstrap-agent-tools.sh
+   ./scripts/catalog-agent-skills.sh --summary
+   ./scripts/bootstrap-agent-skills.sh
    ./scripts/doctor.sh
    ```
 4. **Compile Karabiner config**: `goku`
